@@ -1,5 +1,4 @@
 require 'wd_sinatra_sequel'
-require 'pry'
 
 db_namespace = namespace :db do
 
