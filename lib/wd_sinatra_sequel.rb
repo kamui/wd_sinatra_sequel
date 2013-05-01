@@ -1,5 +1,6 @@
 require "wd_sinatra_sequel/version"
 require "sequel"
+require "yaml"
 
 # Set the default value, feel free to overwrite
 Sequel.default_timezone = :utc
