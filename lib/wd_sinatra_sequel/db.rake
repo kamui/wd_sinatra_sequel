@@ -1,4 +1,4 @@
-require 'wd_sinatra_sequel'
+require "wd_sinatra_sequel"
 
 db_namespace = namespace :db do
 
