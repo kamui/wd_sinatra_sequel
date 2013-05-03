@@ -19,7 +19,8 @@ module WdSinatraSequel
 
   ##### DB Connection ########
   module DBConnector
-    DB_CONFIG = YAML.load_file(File.join(WDSinatra::AppLoader.root_path, "config", "database.yml"))
+    DB_FILE = File.join(WDSinatra::AppLoader.root_path, "config", "database.yml")
+    DB_CONFIG = YAML.load_file(DB_FILE)
 
     module_function
 
@@ -33,11 +34,9 @@ module WdSinatraSequel
       end
 
       # Establish the DB connection
-      db_file = File.join(WDSinatra::AppLoader.root_path, "config", "database.yml")
-      if File.exist?(db_file)
-        hash_settings = YAML.load_file(db_file)
-        if hash_settings && hash_settings[env]
-          @db_configurations = hash_settings
+      if File.exist?(DB_FILE)
+        if DB_CONFIG && DB_CONFIG[env]
+          @db_configurations = DB_CONFIG
           @db_configuration = @db_configurations[env]
           # add loggers
           @db_configuration['loggers'] ||= []
@@ -49,10 +48,10 @@ module WdSinatraSequel
           end
           connect_to_db unless ENV['DONT_CONNECT']
         else
-          raise "#{db_file} doesn't have an entry for the #{env} environment"
+          raise "#{DB_FILE} doesn't have an entry for the #{env} environment"
         end
       else
-        raise "#{db_file} file missing, can't connect to the DB"
+        raise "#{DB_FILE} file missing, can't connect to the DB"
       end
     end
 
