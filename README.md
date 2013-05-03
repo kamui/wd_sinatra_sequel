@@ -36,12 +36,13 @@ Add an Sequel `database.yml` file in your config folder and then require this
 gem in your `app.rb` file and connect to the DB:
 
     require 'wd_sinatra_sequel'
-    DB = WdSinatraSequel::DBConnector.set_db_connection
+    WdSinatraSequel::DBConnector.set_db_connection
+    WdSinatraSequel::DBConnector.connect_to_db
 
 
 The DB settings can be accessed via:
 
-    DBConnector::DB_CONFIG[RACK_ENV]
+    WdSinatraSequel::DBConnector::DB_CONFIG[RACK_ENV]
 
 ## Rake tasks
 
